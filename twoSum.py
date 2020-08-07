@@ -34,7 +34,6 @@ class Solution:
 
 solution = Solution()
 print(solution.twoSum(nums=[3, 5, 8, 2, 7, 11, 15], target=9))
-
 '''
 OUTPUT:
 [3, 5, 8, 2, 7, 11, 15]
