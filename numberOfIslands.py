@@ -27,41 +27,44 @@ Output: 3
 import unittest, typing
 
 class Graph(object):
-    def __init__(self, v):
-        self.v = v
+    def __init__(self):
         self.adj = {}
-        # for i in range(0, v):
-        #     self.adj[i] = [i]
-        # self.printGraph()
         self.islands = 0
 
-    def addEdge(self, v, e):
-        print('add edge')
+    def addEdge(self, v, e=None):
         if v in self.adj:
             self.adj[v].append(e)
         else:
-            self.adj[v] = [e]
-        # self.printGraph()
+            if e!=None:
+                self.adj[v] = [e]
+            else:
+                self.adj[v] = []
 
     # DFS traversal
     def dfs(self, v):
         print('Depth first search')
         self.deep(v, {v:True}, [v], False)
 
+    # BFS traversal
+    def bfs(self, v):
+        print('Breadth first search')
+        self.deep(v, {v:True}, [v], True)
+
     def deep(self,start,b_visited,queue, bfs):
-        print(self.adj)
+        if len(self.adj) == 0:
+            return
+        if len(self.adj) == 1:
+            return
         while len(queue) > 0:
             v = queue.pop()
+            print('length of self.adj ', len(self.adj))
+
             while len(self.adj[v]) > 0:
                 e = self.adj[v].pop()
-                # print('e ', e)
-                # print(self.adj[v])
-                
                 if e not in b_visited:
                     b_visited[e] = True
                     print('node ' + str(v) +  ' is connected to ' + str(e))
                     queue.append(e)
-                    # self.islands +=1
                     if not bfs:
                         break
             if bfs:
@@ -79,39 +82,55 @@ class Graph(object):
 class Solution(object):
 
     def numIslands(self, grid):
-        print('grid height ', len(grid))
-        graphA = Graph(len(grid))
+        graphA = Graph()
         for a in range(0, len(grid)):
-            print('grid[' + str(a) + '] ' + str(grid[a]))
+            all_zero = True
             for b in range(0, len(grid[a])):
-                print('grid[' + str(a) + '] ' + str(grid[a]))
-                print('vector ', a, ' edge, ', b, ' is : ', grid[a][b])
                 if int(grid[a][b]) == 1:
-                    print('adding vector: ', a, ' edge ',b)
+                    all_zero = False
                     graphA.addEdge(int(a), b)
+            if all_zero:
+                graphA.addEdge(int(a), None)
+
         graphA.printGraph()
-        path = graphA.dfs(0)
-        print(path)
-        print('islands ', graphA.islands)
-
-
+        graphA.dfs(0)
+        graphA.printGraph()
+        islands = 0
+        for k,v in graphA.adj.items():
+            islands += len(v)
+        return islands
 
 class unitTest(unittest.TestCase):
     def test_a(self):
-        # solution = Solution()
-        # solution.numIslands(grid=[
-        #     ["1","1","1","1","0"],
-        #     ["1","1","0","1","0"],
-        #     ["1","1","0","0","0"],
-        #     ["0","0","0","0","0"]
-        #     ])
         solution = Solution()
-        solution.numIslands(grid=[
+        result = solution.numIslands(grid=[
+            ["1","1","1","1","0"],
+            ["1","1","0","1","0"],
+            ["1","1","0","0","0"],
+            ["0","0","0","0","0"]
+            ])
+        print('NUMBER OF ISLANDS: ', result)
+
+        solution = Solution()
+        result = solution.numIslands(grid=[
             ["1","1","0","0","0"],
             ["1","1","0","0","0"],
             ["0","0","1","0","0"],
             ["0","0","0","1","1"]
             ])
+        print('NUMBER OF ISLANDS: ', result)
 
+        solution = Solution()
+        result = solution.numIslands(grid=[
+            ])
+        print('NUMBER OF ISLANDS: ', result)
+
+        solution = Solution()
+        result = solution.numIslands(grid=[["1"]])
+        print('NUMBER OF ISLANDS: ', result)
+
+        solution = Solution()
+        result = solution.numIslands(grid=[["1","1"]])
+        print('NUMBER OF ISLANDS: ', result)
 if __name__=='__main__':
     unittest.main()
