@@ -22,23 +22,24 @@ Output: 0
 
 Explanation: In this case, no transaction is done, i.e. max profit = 0.
 '''
-import unittest, time
+import unittest, time, heapq
 
 class Solution:
     def maxProfit(self, prices):
-        validTrades = {}
-        highestProfit = 0
-        for a in range(0, len(prices)-1):
-            for b in range(a+1, len(prices)):
-                if prices[a] < prices[b]:
-                    profit = prices[b] - prices[a]
-                    if profit > highestProfit:
-                        highestProfit = profit
-                        if a in validTrades:
-                            validTrades[a].append(b)
-                        else:
-                            validTrades[a] = [b]
-        return highestProfit
+        # heapq solution - O(n) time - 
+        # heap[0] will be the lowest price
+        priceHeap=[]
+        maxprofit=0
+        for price in prices:
+            if not priceHeap:
+                heapq.heappush(priceHeap,price)
+            elif price-priceHeap[0]>maxprofit:
+                maxprofit= price-priceHeap[0]
+            heapq.heappush(priceHeap,price)
+        return maxprofit
+
+        #Runtime: 52 ms, faster than 99.45% of Python3 online submissions for Best Time to Buy and Sell Stock.
+        #Memory Usage: 15.1 MB, less than 56.32% of Python3 online submissions for Best Time to Buy and Sell Stock.
 
 class UnitTest(unittest.TestCase):
     def test_a(self):
