@@ -55,7 +55,7 @@ class Solution:
                         break
                     i+=1
                 if i >= len(word_b):
-                    return False                    
+                    return False
         return True
 
 class UnitTest(unittest.TestCase):
