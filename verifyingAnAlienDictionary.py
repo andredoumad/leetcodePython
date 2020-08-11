@@ -1,6 +1,8 @@
 # Andre Doumad
 '''
-In an alien language, surprisingly they also use english lowercase letters, 
+This question was asked by Amazon.
+
+Written in an alien language, surprisingly they also use english lowercase letters, 
 but possibly in a different order. The order of the alphabet is some permutation of lowercase letters.
 
 Given a sequence of words written in the alien language, and the order of the 
@@ -29,9 +31,8 @@ Constraints:
 1 <= words[i].length <= 20
 order.length == 26
 All characters in words[i] and order are English lowercase letters.
-
-https://en.wikipedia.org/wiki/Lexicographic_order 
 '''
+
 import unittest
 
 class Solution:
