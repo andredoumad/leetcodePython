@@ -28,79 +28,26 @@ Output: 3
 '''
 import unittest, typing
 
-class Graph(object):
-    def __init__(self):
-        self.adj = {}
-        self.islands = 0
-
-    def addEdge(self, v, e=None):
-        if v in self.adj:
-            self.adj[v].append(e)
-        else:
-            if e!=None:
-                self.adj[v] = [e]
-            else:
-                self.adj[v] = []
-
-    # DFS traversal
-    def dfs(self, v):
-        print('Depth first search')
-        self.deep(v, {v:True}, [v], False)
-
-    # BFS traversal
-    def bfs(self, v):
-        print('Breadth first search')
-        self.deep(v, {v:True}, [v], True)
-
-    def deep(self,start,b_visited,queue, bfs):
-        if len(self.adj) == 0:
-            return
-        if len(self.adj) == 1:
-            return
-        while len(queue) > 0:
-            v = queue.pop()
-            print('length of self.adj ', len(self.adj))
-
-            while len(self.adj[v]) > 0:
-                e = self.adj[v].pop()
-                if e not in b_visited:
-                    b_visited[e] = True
-                    print('node ' + str(v) +  ' is connected to ' + str(e))
-                    queue.append(e)
-                    if not bfs:
-                        break
-            if bfs:
-                del self.adj[v]
-        if not bfs:
-            if self.adj[start]:
-                self.deep(start,b_visited,[start], bfs)
-
-    def printGraph(self):
-        for k,v in self.adj.items():
-            print('k ', k, ' v ', v)
-
-
-
-class Solution(object):
-
+class Solution:
     def numIslands(self, grid):
-        graphA = Graph()
-        for a in range(0, len(grid)):
-            all_zero = True
-            for b in range(0, len(grid[a])):
-                if int(grid[a][b]) == 1:
-                    all_zero = False
-                    graphA.addEdge(int(a), b)
-            if all_zero:
-                graphA.addEdge(int(a), None)
+        count = 0
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j] == '1':
+                    print(i,j)
+                    self.dfs(grid,i,j)
+                    count  += 1
+        #print(grid)
+        return count
+    # use a helper function to flip connected '1's to 0
+    def dfs(self,grid,i,j):
+        grid[i][j] = 0
+        for dr,dc in (1,0), (-1,0), (0,-1), (0,1):
+            r = i + dr
+            c = j + dc
+            if 0 <= r < len(grid) and 0 <= c < len(grid[0]) and grid[r][c]=='1':
+                self.dfs(grid,r,c)
 
-        graphA.printGraph()
-        graphA.dfs(0)
-        graphA.printGraph()
-        islands = 0
-        for k,v in graphA.adj.items():
-            islands += len(v)
-        return islands
 
 class unitTest(unittest.TestCase):
     def test_a(self):
