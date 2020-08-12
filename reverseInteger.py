@@ -1,5 +1,7 @@
 # Andre Doumad
 '''
+This question was asked by Amazon.
+
 Given a 32-bit signed integer, reverse digits of an integer.
 
 Example 1:
