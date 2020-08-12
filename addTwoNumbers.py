@@ -55,15 +55,11 @@ class unitTest(unittest.TestCase):
         solution = Solution()
         result = solution.addTwoNumbers(l1=l1_a, l2=l2_a)
         print(result)
-
-
-
         l1_b = ListNode(8, None)
         l1_a = ListNode(1, l1_b)
 
         l2_a = ListNode(0, None)
         
-
         solution = Solution()
         result = solution.addTwoNumbers(l1=l1_a, l2=l2_a)
         print(result)
