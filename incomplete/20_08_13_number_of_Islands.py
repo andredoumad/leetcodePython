@@ -1,5 +1,5 @@
 # Andre Doumad
-#TODO This needs refactoring and further tests.
+#TODO This needs refactoring and further tests. It passes all but a few corner cases.
 '''
 This Problem was asked by Amazon.
 
