@@ -1,4 +1,5 @@
 # Andre Doumad
+#TODO This needs refactoring and further tests.
 '''
 This Problem was asked by Amazon.
 
@@ -83,3 +84,22 @@ class unitTest(unittest.TestCase):
         print('NUMBER OF ISLANDS: ', result)
 if __name__=='__main__':
     unittest.main()
+
+'''
+0 0
+NUMBER OF ISLANDS:  1
+0 0
+2 2
+3 3
+NUMBER OF ISLANDS:  3
+NUMBER OF ISLANDS:  0
+0 0
+NUMBER OF ISLANDS:  1
+0 0
+NUMBER OF ISLANDS:  1
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+'''

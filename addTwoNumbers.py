@@ -67,3 +67,14 @@ class unitTest(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
+
+
+'''
+<__main__.ListNode object at 0x7f9907c2ac40>
+<__main__.ListNode object at 0x7f9907c2a910>
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+'''

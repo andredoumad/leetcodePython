@@ -74,3 +74,15 @@ class unitTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+'''
+output:
+RESULT IS:  ['let1 art can', 'let3 art zero', 'let2 own kit dig', 'dig1 8 1 5 1', 'dig2 3 6']
+RESULT IS:  ['a2 act car', 'g1 act car', 'a8 act zoo', 'ab1 off key dog', 'a1 9 2 3 1', 'zo4 4 7']
+RESULT IS:  ['1 n u', 'r 527', 'j 893', '6 14', '6 82']
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK
+'''

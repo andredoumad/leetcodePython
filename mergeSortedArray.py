@@ -44,3 +44,11 @@ class Solution(object):
 
 solution = Solution()
 solution.merge([1,2,3,0,0,0],3,[2,5,6],3)
+
+'''
+output:
+nums1  [1, 2, 3, 0, 0, 0]
+nums1  [1, 2, 2, 3, 0, 0]
+nums1  [1, 2, 2, 3, 5, 0]
+nums1  [1, 2, 2, 3, 5, 6]
+'''

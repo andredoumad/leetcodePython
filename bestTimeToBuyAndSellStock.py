@@ -61,3 +61,14 @@ class UnitTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+'''
+result  5
+result  0
+result  2
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+'''

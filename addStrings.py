@@ -28,7 +28,17 @@ class UnitTest(unittest.TestCase):
     def test_a(self):
         solution = Solution()
         result = solution.addStrings('3237', '1374')
+        print('result: ', result)
         self.assertEqual(result, "4611")
 
 if __name__ == '__main__':
     unittest.main()
+
+'''
+result:  4611
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+'''
