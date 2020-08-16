@@ -1,5 +1,4 @@
 # Andre Doumad
-#TODO: speed this up, it works, but it's too slow.
 '''
 This problem was asked by Amazon.
 
