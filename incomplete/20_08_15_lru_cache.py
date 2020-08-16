@@ -24,54 +24,52 @@ cache.get(3);       // returns 3
 cache.get(4);       // returns 4
 '''
 class Node():
-    def __init__(self, val, next=None, prev=None):
+    def __init__(self, key, val, next=None, prev=None):
+        self.key = key
         self.val = val
         self.next = next
         self.prev = prev
 
 class LRUCache:
-
     def __init__(self, capacity: int):
         self.capacity = capacity
-        self.head = None
         self.hash = {}
+        self.head = Node(0, 0)
+        self.tail = Node(0, 0)
+        self.head.next = self.tail
+        self.tail.prev = self.head
 
     def get(self, key: int) -> int:
-        if key not in self.hash:
-            return -1
-        elif key in self.hash:
-            return self.makeHead(self.hash[key]).val
+        if key in self.hash:
+            node = self.hash[key]
+            self._remove(node)
+            self._add(node)
+            return node.val
+        return -1
 
-    def makeHead(self, node):
-        if node.prev:
-            node.prev.next = node.next
-        if node.next:
-            node.next.prev = node.prev
-        node.next = self.head
-        node.prev = None
-        node.next.prev = node
-        self.head = node
-        return node
+    def _remove(self, node):
+        p = node.prev
+        n = node.next
+        p.next = n
+        n.prev = p
+
+    def _add(self, node):
+        p = self.tail.prev
+        p.next = node
+        self.tail.prev = node
+        node.prev = p
+        node.next = self.tail
 
     def put(self, key: int, value: int) -> None:
-        if self.head == None:
-            node = Node(value)
-            self.head = node
-            self.hash[key]= node
-
-        # update hash, replace head with what was updated
-        # hash exists
-        elif key in self.hash:
-            node = self.hash[key]
-            node.val = value
-            self.hash[key] = self.makeHead(node)
-        # hash does not exist
-        elif key not in self.hash:
-            node = Node(value)
-            self.hash[key] = self.makeHead(node)
-
-        # if linked list is longer than capacity
-        # remove hash entry and tail
+        if key in self.hash:
+            self._remove(self.hash[key])
+        n = Node(key, value)
+        self._add(n)
+        self.hash[key] = n
+        if len(self.hash) > self.capacity:
+            n = self.head.next
+            self._remove(n)
+            del self.hash[n.key]
 
     def printLRU(self):
         print('-------')
@@ -96,73 +94,20 @@ solution.printLRU()
 output:
 -------
 hash
-k  1  v  1
 k  2  v  2
 k  3  v  3
 linkedlist
-value:  3
+value:  0
 value:  2
-value:  1
+value:  3
+value:  0
 -------
 hash
-k  1  v  1
 k  2  v  2
 k  3  v  3
 linkedlist
-value:  2
+value:  0
 value:  3
-value:  1
-'''
-
-
-'''
-a better way 
-
-class Node:
-def __init__(self, k, v):
-    self.key = k
-    self.val = v
-    self.prev = None
-    self.next = None
-
-class LRUCache:
-def __init__(self, capacity):
-    self.capacity = capacity
-    self.dic = dict()
-    self.head = Node(0, 0)
-    self.tail = Node(0, 0)
-    self.head.next = self.tail
-    self.tail.prev = self.head
-
-def get(self, key):
-    if key in self.dic:
-        n = self.dic[key]
-        self._remove(n)
-        self._add(n)
-        return n.val
-    return -1
-
-def set(self, key, value):
-    if key in self.dic:
-        self._remove(self.dic[key])
-    n = Node(key, value)
-    self._add(n)
-    self.dic[key] = n
-    if len(self.dic) > self.capacity:
-        n = self.head.next
-        self._remove(n)
-        del self.dic[n.key]
-
-def _remove(self, node):
-    p = node.prev
-    n = node.next
-    p.next = n
-    n.prev = p
-
-def _add(self, node):
-    p = self.tail.prev
-    p.next = node
-    self.tail.prev = node
-    node.prev = p
-    node.next = self.tail
+value:  2
+value:  0
 '''
