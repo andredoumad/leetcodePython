@@ -17,33 +17,34 @@ The string will only contain lowercase characters a-z. The maximum length of the
 '''
 
 class Solution:
+    def test(self, s, i, j):
+        while i<j:
+            if s[i] != s[j]:
+                return False
+
+            i,j = i+1, j-1
+        return True
+
     def validPalindrome(self, s: str) -> bool:
-        backwards = ''
-        for letter in reversed(s):
-            backwards += letter
-        if backwards == s:
-            return True
-        for i in range(0, len(backwards)):
-            temp_backwards = ''
-            for j in range(0, len(backwards)):
-                if j != i:
-                    temp_backwards += backwards[j]
-            temp_forwards = ''
-            for letter in reversed(temp_backwards):
-                temp_forwards += letter
-            if temp_backwards == temp_forwards:
-                return True
-        return False
+        i, j = 0, len(s)-1
+        while i < j:
+            if s[i] == s[j]:
+                i += 1
+                j -= 1
+            elif s[i] != s[j]:
+                return self.test(s, i+1, j) or self.test(s, i, j-1)
+        return True
+
 
 import unittest, time
 class UnitTest(unittest.TestCase):
     def test_a(self):
         solution = Solution()
 
-        # start_time = time.time()
-        # result = solution.validPalindrome('aba')
-        # print('result ', result)
-        # print('processing time: ', time.time() - start_time)
+        start_time = time.time()
+        result = solution.validPalindrome('aba')
+        print('result ', result)
+        print('processing time: ', time.time() - start_time)
 
         start_time = time.time()
         result = solution.validPalindrome('abca')
@@ -58,3 +59,18 @@ class UnitTest(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
+
+'''
+output:
+result  True
+processing time:  1.5497207641601562e-05
+result  True
+processing time:  3.814697265625e-06
+result  False
+processing time:  7.343292236328125e-05
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+'''
