@@ -1,6 +1,6 @@
 # Andre Doumad
 '''
-This problem was asked by Amazon, Google
+This problem was asked by Amazon, Google, Facebook.
 
 Given a string containing just the characters '(', ')', '{', '}', '[' and ']', 
 determine if the input string is valid.
