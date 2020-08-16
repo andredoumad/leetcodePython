@@ -1,4 +1,5 @@
 # Andre Doumad
+# 200816
 '''
 125. Valid Palindrome
 Easy
@@ -22,7 +23,6 @@ Example 2:
 
 Input: "race a car"
 Output: false
- 
 
 Constraints:
 
