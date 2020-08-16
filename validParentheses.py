@@ -1,6 +1,6 @@
 # Andre Doumad
 '''
-This problem was asked by Amazon
+This problem was asked by Amazon, Google
 
 Given a string containing just the characters '(', ')', '{', '}', '[' and ']', 
 determine if the input string is valid.
@@ -75,3 +75,16 @@ class UnitTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+'''
+result is  True
+result is  True
+result is  False
+result is  False
+result is  True
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+'''
