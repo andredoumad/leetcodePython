@@ -47,3 +47,12 @@ print('result ', result)
 
 result = solution.longestPalindrome('ccd')
 print('result ', result)
+
+'''
+output:
+result  bab
+result  bb
+result  bb
+result  bb
+result  cc
+'''
