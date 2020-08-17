@@ -25,18 +25,25 @@ import unittest
 class Solution:
 
     def lengthOfLongestSubstring(self, s: str) -> int:
-        start = maxLength = 0
-        usedChar = {}
+        dic, res, start, = {}, 0, 0
+        for i, ch in enumerate(s):
+            # when char already in dictionary
+            if ch in dic:
+                # check length from start of string to index
+                res = max(res, i-start)
+                # update start of string index to the next index
+                start = max(start, dic[ch]+1)
+            # add/update char to/of dictionary 
+            print('i ', i)
+            dic[ch] = i
+        # answer is either in the begining/middle OR some mid to the end of string
         
-        for i in range(len(s)):
-            if s[i] in usedChar and start <= usedChar[s[i]]:
-                start = usedChar[s[i]] + 1
-            else:
-                maxLength = max(maxLength, i - start + 1)
+        for k,v in dic.items():
+            print('k ', k, ' v ', v)
 
-            usedChar[s[i]] = i
-
-        return maxLength
+        print('res ', res)
+        print('len(s)-start ', len(s)-start)
+        return max(res, len(s)-start)
 
 class UnitTest(unittest.TestCase):
     def test_a(self):
