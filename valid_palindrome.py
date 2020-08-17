@@ -1,16 +1,8 @@
 # Andre Doumad
 # 200816
 '''
-125. Valid Palindrome
-Easy
+This problem was asked by Amazon.
 
-1341
-
-3073
-
-Add to List
-
-Share
 Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
 
 Note: For the purpose of this problem, we define empty string as valid palindrome.
