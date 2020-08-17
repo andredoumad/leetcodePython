@@ -45,8 +45,6 @@ class Solution:
 solution= Solution()
 result = solution.isPalindrome("A man, a plan, a canal: Panama")
 print('result', result)
-# assert(result, True)
 
 result = solution.isPalindrome("race a car")
 print('result', result)
-# assert(result, False)
