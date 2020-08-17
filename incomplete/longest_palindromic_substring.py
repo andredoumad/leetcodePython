@@ -18,5 +18,4 @@ class Solution:
 
 solution = Solution()
 solution.longestPalindrome('babad')
-
 solution.longestPalindrome('cbbd')
