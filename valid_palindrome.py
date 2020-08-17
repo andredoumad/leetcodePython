@@ -36,14 +36,17 @@ class Solution:
         else:
             s = s.replace(' ', '')
             s = re.sub(r'\W+', '', s)
+            s = re.sub(r'_', '', s)
             s = s.lower()
-            # s = filter(str.isalnum, s)
         print(s)
-        # exit()
         i, j = 0, len(s)-1
         while i < j:
             if s[i] == s[j]:
-                pass
+                i += 1
+                j -= 1
+            else:
+                return False
+        return True
 
 
 
