@@ -22,7 +22,6 @@ class Solution:
         merged = []
         for a in intervals:
             if not merged or merged[-1][-1] < a[0]:
-
                 merged.append(a)
                 print('merged[-1][-1] ', merged[-1][-1])
             else:
@@ -41,3 +40,23 @@ class UnitTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+'''
+merged[-1][-1]  3
+a[-1] 3
+a[-1] 6
+merged[-1][-1]  10
+a[-1] 10
+merged[-1][-1]  18
+a[-1] 18
+[[1, 6], [8, 10], [15, 18]]
+merged[-1][-1]  4
+a[-1] 4
+a[-1] 5
+[[1, 5]]
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+'''
