@@ -27,7 +27,6 @@ class Solution:
             p *= nums[i]
         p = 1
         for i in reversed(range(n)):
-            print('i ', i)
             output[i] *= p
             p *= nums[i]
         return output
