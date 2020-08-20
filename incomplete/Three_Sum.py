@@ -17,35 +17,33 @@ A solution set is:
   [-1, -1, 2]
 ]
 '''
-from itertools import permutations 
 class Solution:
-    def __init__(self):
-        self.results = {}
-        self.permutations_nums = []
-    def test(self, lis, l, c, r):
-        if lis[l] + lis[c] + lis[r] == 0:
-            stringKey = ''
-            stringKey += str(lis[l])
-            stringKey += str(lis[c])
-            stringKey += str(lis[r])
-            if stringKey not in self.results:
-                self.results[stringKey] = []
-                self.results[stringKey].append(lis[l])
-                self.results[stringKey].append(lis[c])
-                self.results[stringKey].append(lis[r])
+    def twoSum(self, i, res, nums):
+        lo, hi = i+1, len(nums)-1
+        while lo<hi:
+            sum = nums[i] + nums[lo] + nums[hi]
+            if sum < 0:
+                lo +=1
+            elif sum > 0:
+                hi -=1
+            else:
+                res.append([nums[i], nums[lo], nums[hi]])
+                lo +=1
+                hi -=1
+                while lo<hi and nums[lo] ==nums[lo-1]:
+                    lo+=1
+        return res
 
     def threeSum(self, nums):
-        self.permutations_nums = permutations(nums)
-        for vals in list(self.permutations_nums):
-            print('testing: ', vals)
-            for i in range(1, len(vals)-1):
-                self.test(vals, i-1, i, i+1) # odds
-        final = []
-        for k,v in self.results.items():
-            print('k ', k, ' v ', v)
-            final.append(v)
-        return final
-
+        res = []
+        nums.sort()
+        print(nums)
+        for i in range(0, len(nums)):
+            if nums[i] > 0:
+                break
+            if i == 0 or nums[i-1] != nums[i]:
+                self.twoSum(i, res, nums)
+        return res
 
 solution = Solution()
 results = solution.threeSum([-1, 0, 1, 2, -1, -4])
