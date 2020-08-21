@@ -1,7 +1,7 @@
 # Andre Doumad
 # 200821
 '''
-This problem was asked by Amazon.
+This problem was asked by FAANG companies...
 
 Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
 
