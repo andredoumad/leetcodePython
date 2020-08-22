@@ -25,7 +25,13 @@ import unittest
 class Solution:
 
     def lengthOfLongestSubstring(self, s: str) -> int:
-        
+        dic, res, start = {}, 0, 0
+        for i, ch in enumerate(s):
+            if ch in dic:
+                res = max(res, i-start)
+                start = max(start, dic[ch]+1)
+            dic[ch] = i
+        return max(res, len(s)-start)
 
 class UnitTest(unittest.TestCase):
     def test_a(self):
@@ -53,6 +59,34 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(result,2)
 if __name__ == '__main__':
     unittest.main()
+
+
+
+
+'''
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        dic, res, start, = {}, 0, 0
+        for i, ch in enumerate(s):
+            # when char already in dictionary
+            if ch in dic:
+                # check length from start of string to index
+                res = max(res, i-start)
+                # update start of string index to the next index
+                start = max(start, dic[ch]+1)
+            # add/update char to/of dictionary 
+            print('i ', i)
+            dic[ch] = i
+        # answer is either in the begining/middle OR some mid to the end of string
+        
+        for k,v in dic.items():
+            print('k ', k, ' v ', v)
+
+        print('res ', res)
+        print('len(s)-start ', len(s)-start)
+        return max(res, len(s)-start)
+'''
+
+
 
 '''
 new string =  ab
@@ -84,33 +118,3 @@ Ran 1 test in 0.000s
 OK
 '''
 
-
-
-
-
-
-
-
-
-'''
-    def lengthOfLongestSubstring(self, s: str) -> int:
-        dic, res, start, = {}, 0, 0
-        for i, ch in enumerate(s):
-            # when char already in dictionary
-            if ch in dic:
-                # check length from start of string to index
-                res = max(res, i-start)
-                # update start of string index to the next index
-                start = max(start, dic[ch]+1)
-            # add/update char to/of dictionary 
-            print('i ', i)
-            dic[ch] = i
-        # answer is either in the begining/middle OR some mid to the end of string
-        
-        for k,v in dic.items():
-            print('k ', k, ' v ', v)
-
-        print('res ', res)
-        print('len(s)-start ', len(s)-start)
-        return max(res, len(s)-start)
-'''
