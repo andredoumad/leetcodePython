@@ -41,6 +41,19 @@ class PairString():
 
 '''
 
+class Graph():
+    def __init__(self):
+        self.adj = {}
+    
+    def addEdge(self, v, e):
+        if v in self.adj:
+            self.adj[v].append(e)
+        else:
+            self.adj[v] = [e]
+    
+    def printGraph(self):
+        for k,v in self.adj.items():
+            print('k ', k, ' v ', v)
 
 class PairString():
     def __init__(self, first, second):
@@ -49,7 +62,22 @@ class PairString():
 
 class Solution():
     def largestItemAssociation(self, itemAssociation):
-        # programming-funzone.
+        graph = Graph()
+        allItems = {}
+        for j in range(0, len(itemAssociation)):
+            for k in range(0, len(itemAssociation[j])):
+                graph.addEdge(j, itemAssociation[j][k])
+                if itemAssociation[j][k] not in allItems:
+                    allItems[itemAssociation[j][k]] = [j]
+                else:
+                    allItems[itemAssociation[j][k]].append(j)
+
+        print('--- all items ---')
+        for k,v in allItems.items():
+            print('k ', k, ' v ', v)
+        print('--- graph ---')
+        graph.printGraph()
+
         pass
 
 
