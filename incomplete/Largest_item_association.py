@@ -47,3 +47,11 @@ class PairString():
         self.first = first
         self.second = second
 
+class Solution():
+    def largestItemAssociation(self, itemAssociation):
+        # programming-funzone.
+        pass
+
+
+s = Solution()
+print(s.largestItemAssociation([['Item1', 'Item2'], ['Item3', 'Item4'], ['Item4', 'Item5']])) # should print [Item3, Item4, Item5]
