@@ -41,45 +41,102 @@ class PairString():
 
 '''
 
-class Graph():
-    def __init__(self):
-        self.adj = {}
-    
-    def addEdge(self, v, e):
-        if v in self.adj:
-            self.adj[v].append(e)
-        else:
-            self.adj[v] = [e]
-    
-    def printGraph(self):
-        for k,v in self.adj.items():
-            print('k ', k, ' v ', v)
-
 class PairString():
     def __init__(self, first, second):
         self.first = first
         self.second = second
 
+class Graph():
+    def __init__(self):
+        self.adj = {}
+
+    def addEdge(self, v, e):
+        if v not in self.adj:
+            self.adj[v] = [e]
+        else:
+            self.adj[v].append(e)
+
+    def printGraph(self):
+        for k,v in self.adj.items():
+            print('k ', k, ' v ', v)
+
+    # def dfs(self, start, visited, queue):
+
+
+
+
 class Solution():
     def largestItemAssociation(self, itemAssociation):
+        print('------------------')
+        print('INPUT: ', itemAssociation)
         graph = Graph()
-        allItems = {}
-        for j in range(0, len(itemAssociation)):
-            for k in range(0, len(itemAssociation[j])):
-                graph.addEdge(j, itemAssociation[j][k])
-                if itemAssociation[j][k] not in allItems:
-                    allItems[itemAssociation[j][k]] = [j]
-                else:
-                    allItems[itemAssociation[j][k]].append(j)
-
-        print('--- all items ---')
-        for k,v in allItems.items():
-            print('k ', k, ' v ', v)
-        print('--- graph ---')
+        for i in range(0, len(itemAssociation)):
+            for j in range(0, len(itemAssociation[i])):
+                graph.addEdge(i, itemAssociation[i][j])
+        
         graph.printGraph()
+        # graph.dfs(0, [], [])
+        graph.dfs()
 
-        pass
+        res = True
+        print('RESULT: ', res)
+        print('------------------')
+        return res
+
 
 
 s = Solution()
-print(s.largestItemAssociation([['Item1', 'Item2'], ['Item3', 'Item4'], ['Item4', 'Item5']])) # should print [Item3, Item4, Item5]
+# print(s.largestItemAssociation([]) == [])
+print(s.largestItemAssociation([['Item1', 'Item2'], ['Item3', 'Item4'], ['Item4', 'Item5']]) == ['Item3', 'Item4', 'Item5'])
+# print(s.largestItemAssociation([['item1','item2']]) == ['item1','item2'])
+# print(s.largestItemAssociation([['item1','item2'],['item2','item3'],['item4','item5'],['item5','item6']]) == ['item1','item2','item3'])
+# print(s.largestItemAssociation([['Item1','Item2'],['Item3','Item4'],['Item4','Item5']]) == ['Item3', 'Item4', 'Item5'])
+# print(s.largestItemAssociation([['Item1','Item2'],['Item2','Item5'],['Item3']]) == ['Item1', 'Item2', 'Item5'])
+# print(s.largestItemAssociation([['Item1','Item2'],['Item2','Item3'],['Item4','Item5'],['Item5','Item6']]) == ['Item1', 'Item2', 'Item3'])
+# print(s.largestItemAssociation([["Item1","Item2"], ["Item1","Item3"], ["Item2","Item7"], ["Item3","Item7"], ["Item5","Item6"], ["Item3","Item7"]]) == ['Item1', 'Item2', 'Item3', 'Item7'])
+
+# print(s.largestItemAssociation([['Item1','Item2'],['Item1','Item3'],['Item2','Item7'],['Item3','Item7'],['Item5','Item6'],['Item3','Item7']]) == ['Item1', 'Item2', 'Item3', 'Item7'])
+# print(s.largestItemAssociation([['Item3','Item2','Item4'], ['Item1', 'Item2'],['Item3', 'Item5', 'Item7'],['Item6','Item8']]) == ['Item1', 'Item2', 'Item3', 'Item4', 'Item5', 'Item7'])
+
+
+
+# this fails on the last 3 test cases. Doesnt create a graph.
+# class Solution():
+#     def largestItemAssociation(self, itemAssociation):
+#         print('------------------')
+#         print('INPUT: ', itemAssociation)
+#         if itemAssociation == []:
+#             return []
+#         allItems = {}
+#         for j in range(0, len(itemAssociation)):
+#             for k in range(0, len(itemAssociation[j])):
+#                 if itemAssociation[j][k] not in allItems:
+#                     allItems[itemAssociation[j][k]] = [j]
+#                 else:
+#                     allItems[itemAssociation[j][k]].append(j)
+
+#         print('--- all items ---')
+#         mostFrequentItem = None
+#         mostFrequentItemGroups = None
+#         for k,v in allItems.items():
+#             print('k ', k, ' v ', v)
+#             if mostFrequentItem == None:
+#                 mostFrequentItem = k
+#                 mostFrequentItemGroups = v
+#             elif len(mostFrequentItemGroups) < len(v):
+#                 mostFrequentItem = k
+#                 mostFrequentItemGroups = v
+#         print('mostFrequentItem = ', mostFrequentItem)
+#         print('mostFrequentItemGroups = ', mostFrequentItemGroups)
+#         res = []
+#         for i in range(0, len(mostFrequentItemGroups)):
+#             # print('i ', i)
+#             print('mostFrequentItemGroups[', i, '] ', mostFrequentItemGroups[i])
+#             for j in range(0, len(itemAssociation[i])):
+#                 print('contains items: ', itemAssociation[mostFrequentItemGroups[i]][j])
+#                 if itemAssociation[mostFrequentItemGroups[i]][j] not in res:
+#                     res.append(itemAssociation[mostFrequentItemGroups[i]][j])
+#         print('RESULT: ', res)
+#         print('------------------')
+#         return res
+
