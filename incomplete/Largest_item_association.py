@@ -57,12 +57,28 @@ class Graph():
             self.adj[v].append(e)
 
     def printGraph(self):
+        print('length of graph is ', len(self.adj))
         for k,v in self.adj.items():
             print('k ', k, ' v ', v)
 
-    # def dfs(self, start, visited, queue):
+    def dfs(self, start):
+        self.doDfs(start, {start:True}, [start], self.adj)
 
-
+    def doDfs(self, start, visited, queue, adj):
+        print('dfs start: ', start)
+        while len(queue) > 0:
+            v = queue.pop()
+            while len(adj[v]) > 0:
+                e = adj[v].pop()
+                if e not in visited:
+                    visited[e] = True
+                    print('node ', v, ' is connected to ', e)
+                    # queue.append(e)
+        if len(adj) > 0:
+            adj.pop(start)
+            start+=1
+            print('length of graph is ', len(adj))
+            self.doDfs(start, visited, [start], adj)
 
 
 class Solution():
@@ -75,8 +91,7 @@ class Solution():
                 graph.addEdge(i, itemAssociation[i][j])
         
         graph.printGraph()
-        # graph.dfs(0, [], [])
-        graph.dfs()
+        graph.dfs(0)
 
         res = True
         print('RESULT: ', res)
