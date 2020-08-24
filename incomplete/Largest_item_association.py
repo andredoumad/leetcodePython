@@ -49,6 +49,8 @@ class PairString():
 class Graph():
     def __init__(self):
         self.adj = {}
+        self.nameToInt = {}
+        self.intToName = {}
 
     def addEdge(self, v, e):
         if v not in self.adj:
@@ -57,41 +59,64 @@ class Graph():
             self.adj[v].append(e)
 
     def printGraph(self):
+        print('--- graph ---- ')
         print('length of graph is ', len(self.adj))
         for k,v in self.adj.items():
             print('k ', k, ' v ', v)
 
+        print('--- nameToInt ---- ')
+        print('length of nameToInt is ', len(self.nameToInt))
+        for k,v in self.nameToInt.items():
+            print('k ', k, ' v ', v)
+
+        print('--- intToName ---- ')
+        print('length of intToName is ', len(self.intToName))
+        for k,v in self.intToName.items():
+            print('k ', k, ' v ', v)
+
     def dfs(self, start):
+        print('start ', start)
         self.doDfs(start, {start:True}, [start], self.adj)
 
     def doDfs(self, start, visited, queue, adj):
         print('dfs start: ', start)
+        print('queue start: ', queue)
         while len(queue) > 0:
             v = queue.pop()
-            while len(adj[v]) > 0:
+            while len(adj) > 0:
                 e = adj[v].pop()
+                
                 if e not in visited:
                     visited[e] = True
-                    print('node ', v, ' is connected to ', e)
-                    # queue.append(e)
-        if len(adj) > 0:
-            adj.pop(start)
-            start+=1
-            print('length of graph is ', len(adj))
-            self.doDfs(start, visited, [start], adj)
-
+                    print(v, ' is connected to ', e)
 
 class Solution():
     def largestItemAssociation(self, itemAssociation):
         print('------------------')
         print('INPUT: ', itemAssociation)
         graph = Graph()
-        for i in range(0, len(itemAssociation)):
-            for j in range(0, len(itemAssociation[i])):
-                graph.addEdge(i, itemAssociation[i][j])
         
+        itr = 1
+        for i in range(0, len(itemAssociation)):
+            print('itemAssociation ', itemAssociation[i])
+            if itemAssociation[i].first not in graph.nameToInt: 
+                graph.nameToInt[itemAssociation[i].first] = itr
+                graph.intToName[itr] = itemAssociation[i].first
+                graph.addEdge(itemAssociation[i].first, i)
+                itr+=1
+            else:
+                graph.addEdge(graph.nameToInt[itemAssociation[i].first], i)
+
+            if itemAssociation[i].second not in graph.nameToInt: 
+                graph.nameToInt[itemAssociation[i].second] = itr
+                graph.intToName[itr] = itemAssociation[i].second
+                graph.addEdge(itemAssociation[i].second, i)
+                itr+=1
+            else:
+                graph.addEdge(graph.nameToInt[itemAssociation[i].second], i)
+
         graph.printGraph()
-        graph.dfs(0)
+        graph.dfs(itemAssociation[0].first)
 
         res = True
         print('RESULT: ', res)
@@ -99,10 +124,9 @@ class Solution():
         return res
 
 
-
 s = Solution()
 # print(s.largestItemAssociation([]) == [])
-print(s.largestItemAssociation([['Item1', 'Item2'], ['Item3', 'Item4'], ['Item4', 'Item5']]) == ['Item3', 'Item4', 'Item5'])
+print(s.largestItemAssociation([PairString('Item1', 'Item2'), PairString('Item3', 'Item4'), PairString('Item4', 'Item5')]) == ['Item3', 'Item4', 'Item5'])
 # print(s.largestItemAssociation([['item1','item2']]) == ['item1','item2'])
 # print(s.largestItemAssociation([['item1','item2'],['item2','item3'],['item4','item5'],['item5','item6']]) == ['item1','item2','item3'])
 # print(s.largestItemAssociation([['Item1','Item2'],['Item3','Item4'],['Item4','Item5']]) == ['Item3', 'Item4', 'Item5'])
