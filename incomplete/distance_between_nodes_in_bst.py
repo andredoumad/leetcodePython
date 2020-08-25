@@ -72,9 +72,6 @@ class BST():
             self.doPrettyPrint(node.right, indent, True)
 
 
-
-
-
     # delete
 
     # find
