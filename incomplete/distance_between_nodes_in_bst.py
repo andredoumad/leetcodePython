@@ -26,7 +26,7 @@ class Node():
         else:
             return self
 
-class BST():
+class Solution():
 
     def __init__(self):
         self.root = None
@@ -71,21 +71,47 @@ class BST():
             self.doPrettyPrint(node.left, indent, False)
             self.doPrettyPrint(node.right, indent, True)
 
+    def lca(self, root, node1, node2):
+        if not root:
+            return None
+        
+        if root.val == node1 or root.val == node2:
+            return root
+        left = self.lca(root.left, node1, node2)
+        right = self.lca(root.right, node1, node2)
+        if left and right:
+            return root
+        elif left:
+            return left
+        elif right:
+            return right
+        return None
 
-    # delete
+    def getdis(self, root, val):
+        if val > root.val:
+            return self.getdis(root.right, val)+1
+        elif val < root.val:
+            return self.getdis(root.left, val)+1
+        else:
+            return 0
 
-    # find
+    def solve(self, nums, node1, node2):
+        for num in nums:
+            self.insert(num)
+        self.printtree()
 
-    # rotate left
+        mid = self.lca(self.root, node1, node2)
+        print(mid.val)
+        return self.getdis(self.root, node1) + self.getdis(self.root, node2)
 
-    # rotate right
 
 
-bst = BST()
-bst.insert(2)
-bst.insert(1)
-bst.insert(3)
-bst.printtree()
+nums = [2,1,3]
+node1 = 1
+node2 = 3
+s = Solution()
+print(s.solve(nums, node1, node2))
+
 
 
 
