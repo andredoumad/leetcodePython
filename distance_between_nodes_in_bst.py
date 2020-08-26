@@ -1,6 +1,8 @@
 # Andre Doumad
 # 200824
 '''
+This problem was asked by FAANG companies.
+
 Given a list of unique integers nums, construct a BST from it (you need to insert nodes one-by-one with the given order to get the BST) and find the distance between two nodes node1 and node2. Distance is the number of edges between two nodes. If any of the given nodes does not appear in the BST, return -1.
 
 Example 1:
@@ -87,6 +89,7 @@ class Solution():
             return right
         return None
 
+
     def getdis(self, root, val):
         if val > root.val:
             return self.getdis(root.right, val)+1
@@ -113,94 +116,13 @@ s = Solution()
 print(s.solve(nums, node1, node2))
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# #Distance between Nodes in BST
-# nums = [5, 3, 1, 4, 2, 7, 6, 8]
-# node1 = 2
-# node2 = 6
-
-# class Node:
-#     def __init__(self, val):
-#         self.val = val
-#         self.left = None
-#         self.right = None
-
-# class Solution:
-#     def atob(self, nums, node1, node2):
-#         root = Node(nums[0])
-#         for num in nums:
-#             if num != nums[0]:
-#                  self.build_tree(root, num)
-                    
-#         mid = self.lca(root, node1, node2)
-#         print("mid:", mid.val, "root", root.val)
-        
-#         return self.getdis(root, node1) + self.getdis(root, node2)
-        
-    
-#     def lca(self, root, node1, node2):
-#         if not root:
-#             return None
-        
-#         if root.val == node1 or root.val == node2:
-#             return root
-#         left = self.lca(root.left, node1, node2)
-#         right = self.lca(root.right, node1, node2)
-#         if left and right:
-#             return root
-#         elif left:
-#             return left
-#         elif right:
-#             return right
-#         return None
-    
-#     def getdis(self, root, val):
-#         if val > root.val:
-#             return self.getdis(root.right, val)+1
-#         elif val < root.val:
-#             return self.getdis(root.left, val)+1
-#         else:
-#             return 0
-
-#     def build_tree(self, root, num):
-#         if num < root.val:
-#             if root.left:
-#                 self.build_tree(root.left, num)
-#             else:
-#                 root.left = Node(num)
-#                 return 
-#         else:
-#             if root.right:
-#                 self.build_tree(root.right, num)
-#             else:
-#                 root.right = Node(num)
-#                 return
-
-# Dis = Solution()
-# print("dis_is:", Dis.atob(nums, node1, node2))
+'''
+------------
+TREE: 
+R-----2
+     L-----1
+     R-----3
+-------------
+2
+2
+'''
