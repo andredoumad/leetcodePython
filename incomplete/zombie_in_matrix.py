@@ -32,25 +32,27 @@ At the end of the 2nd hour, the status of the grid:
 }
 '''
 
+
 class Solution():
     def minHours(self, grid):
-        zombies = []
+        zombies = [] # hrs, row, col
         if not grid: return 0
         nrow, ncol = len(grid), len(grid[0])
+        directions = [[0,1],[0,-1],[1,0],[-1,0]]
         for row in range(nrow):
             for col in range(ncol):
-                if grid[row][col] == 1: zombies.append([0, row, col])
-        directions = [[0,1],[0,-1],[1,0],[-1,0]]
+                if grid[row][col] == 1:
+                    zombies.append([0,row,col])
+        hr =0
         while zombies:
-            hrs,x,y = zombies.pop(0)
-            for direction in directions:
-                X = x+direction[0]
-                Y = y+direction[1]
+            hr, x, y = zombies.pop(0)
+            for dirX, dirY in directions:
+                X = x+dirX
+                Y = y+dirY
                 if 0<=X<nrow and 0<=Y<ncol and grid[X][Y] == 0:
-                    grid[X][Y] = 1
-                    zombies.append([hrs+1,X,Y])
-        return hrs
-
+                    grid[X][Y] =1
+                    zombies.append([hr+1,X,Y])
+        return hr
 
     def printGrid(self, grid):
         print('--- zambies ---')
