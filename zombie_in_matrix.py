@@ -30,8 +30,6 @@ At the end of the 2nd hour, the status of the grid:
  [1, 1, 1, 1, 1],
  [1, 1, 1, 1, 1]]
 
-
-}
 '''
 
 
@@ -66,40 +64,3 @@ print(s.minHours([
             [0, 1, 0, 0, 0]
             ]))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-'''
-    def minHours(self, grid):
-        if not grid: return 0
-        zombies = [] # hours, row, col
-        nrow, ncol = len(grid), len(grid[0])
-        hours = 0
-        directions = [[1,0],[-1,0],[0,1],[0,-1]]
-        for row in range(nrow):
-            for col in range(ncol):
-                if grid[row][col] == 1:
-                    zombies.append([0,row,col])
-        while zombies:
-            hours, x, y = zombies.pop(0)
-            for direction in directions:
-                X = x+direction[0]
-                Y = y+direction[1]
-                if 0<=X<nrow and 0<=Y<ncol and grid[X][Y] ==0:
-                    grid[X][Y] = 1
-                    zombies.append([hours+1, X,Y])
-        return hours
-    '''
