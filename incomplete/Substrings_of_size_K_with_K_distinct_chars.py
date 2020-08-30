@@ -2,11 +2,9 @@
 # 200824
 '''
 This problem was asked by Amazon.
-
 Given a string s and an int k, return all unique substrings of s of size k with k distinct characters.
 
 Example 1:
-
 Input: s = "abcabc", k = 3
 Output: ["abc", "bca", "cab"]
 Example 2:
@@ -26,3 +24,20 @@ The input string consists of only lowercase English letters [a-z]
 0 ≤ k ≤ 26
 '''
 
+import unittest
+
+class Solution():
+    def solve(self, s, k):
+        if not s or k == 0:
+            return []
+        
+
+
+class UnitTest(unittest.TestCase):
+    def test_a(self):
+        s = Solution()
+        result = s.solve('abcabc', 3)
+        self.assertEqual(result, ["abc", "bca", "cab"])
+
+if __name__ == '__main__':
+    unittest.main()
