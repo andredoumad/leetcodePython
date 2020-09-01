@@ -22,3 +22,24 @@ nums[0] + nums[2] = 20 + 40 = 60 = 90 - 30
 nums[1] + nums[5] = 50 + 10 = 60 = 90 - 30
 You should return the pair with the largest number.
 '''
+
+class Solution():
+    def solve(self, nums, target):
+        target = target-30
+        dictionary = {}
+        res = []
+
+        for i in range(len(nums)):
+            findThis = target-nums[i]
+            if findThis in dictionary:
+                findThisIndex = nums.index(findThis)
+                if i != findThisIndex:
+                    res.append(sorted([i,findThisIndex]))
+            dictionary[nums[i]] = i
+
+        return max(res)
+
+
+s = Solution()
+# print(s.solve([1, 10, 25, 35, 60], 90))
+print(s.solve([20, 50, 40, 25, 30, 10], 90))
