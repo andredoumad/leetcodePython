@@ -30,28 +30,14 @@ import unittest, typing
 
 class Solution:
     def numIslands(self, grid):
-        # print('==========')
-        # print('Finding number of islands given:')
-        # for k in range(len(grid)):
-        #     print(grid[k])
         if not grid:
             return 0
-            
         count = 0
         for i in range(len(grid)):
             for j in range(len(grid[0])):
                 if grid[i][j] == '1':
-                    # print('---before---')
-                    # for k in range(len(grid)):
-                    #     print(grid[k])
-                    # erase connected islands
                     self.dfs(grid, i, j)
-                    # then count it as one island
                     count += 1
-                    # print('---after---')
-                    # for k in range(len(grid)):
-                    #     print(grid[k])
-                    # print('islands: ', count)
         return count
 
     def dfs(self, grid, i, j):
