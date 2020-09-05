@@ -55,35 +55,33 @@ Time: O(m * n + L), space: O(m * n + L * m) - including return list ans, where m
 class Trie():
     def __init__(self):
         self.sub = {}
-        self.suggestion = []
+        self.suggestions = []
 
 class Solution():
     def insert(self, word, root):
-        for char in word:
-            if char not in root.sub:
-                root.sub[char] = Trie()
-            root = root.sub[char]
-            root.suggestion.append(word)
-            root.suggestion.sort()
-            if len(root.suggestion) > 3:
-                root.suggestion.pop()
-
+        for ch in word:
+            if ch not in root.sub:
+                root.sub[ch] = Trie()
+            root = root.sub[ch]
+            root.suggestions.append(word)
+            root.suggestions.sort()
+            if len(root.suggestions) > 3:
+                root.suggestions.pop()
     def search(self, word, root):
         ans = []
-        for char in word:
+        for ch in word:
             if root:
-                root = root.sub.get(char)
-            if root and root.suggestion:
-                ans.append(root.suggestion)
+                root = root.sub.get(ch)
+            if root and root.suggestions:
+                ans.append(root.suggestions)
             else:
                 ans.append([])
         return ans
-    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
+    def suggestedProducts(self, products, searchWord):
         root = Trie()
         for word in products:
             self.insert(word, root)
         return self.search(searchWord, root)
-
 
 class UnitTest(unittest.TestCase):
     def test_a(self):
