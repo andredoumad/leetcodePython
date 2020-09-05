@@ -52,6 +52,53 @@ import unittest
 Complexity depends on the sorting, the process of building Trie and the length of searchWord. Sorting cost time O(m * n), due to involving comparing String, which cost time O(m) for each comparison, building Trie cost O(m * n). Therefore,
 Time: O(m * n + L), space: O(m * n + L * m) - including return list ans, where m = average length of products, n = products.length, L = searchWord.length().
 '''
+class Trie():
+    def __init__(self):
+        self.sub = {}
+        self.suggestion = []
+
+class Solution():
+    def insert(self, word, root):
+        for char in word:
+            if char not in root.sub:
+                root.sub[char] = Trie()
+            root = root.sub[char]
+            root.suggestion.append(word)
+            root.suggestion.sort()
+            if len(root.suggestion) > 3:
+                root.suggestion.pop()
+
+    def search(self, word, root):
+        ans = []
+        for char in word:
+            if root:
+                root = root.sub.get(char)
+            if root and root.suggestion:
+                ans.append(root.suggestion)
+            else:
+                ans.append([])
+        return ans
+    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
+        root = Trie()
+        for word in products:
+            self.insert(word, root)
+        return self.search(searchWord, root)
+
+
+class UnitTest(unittest.TestCase):
+    def test_a(self):
+        s = Solution()
+        result = s.suggestedProducts(["mobile","mouse","moneypot","monitor","mousepad"], searchWord = "m")
+        print('result for m = ', result)
+        result = s.suggestedProducts(["mobile","mouse","moneypot","monitor","mousepad"], searchWord = "mou")
+        print('result for mou = ', result)
+        result = s.suggestedProducts(["havanna"], searchWord = "tatiana")
+        print('result for mou = ', result)
+
+if __name__ == '__main__':
+    unittest.main()
+
+'''
 class Trie:
     def __init__(self):
         self.sub = {}
@@ -89,19 +136,4 @@ class Solution:
         
         return self.search(searchWord, root)
 
-
-class UnitTest(unittest.TestCase):
-    def test_a(self):
-        s = Solution()
-        result = s.suggestedProducts(["mobile","mouse","moneypot","monitor","mousepad"], searchWord = "m")
-        print('result for m = ', result)
-        # result = s.suggestedProducts(["mobile","mouse","moneypot","monitor","mousepad"], searchWord = "mou")
-        # print('result for mou = ', result)
-
-
-
-
-if __name__ == '__main__':
-    unittest.main()
-
-
+'''
