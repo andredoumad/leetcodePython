@@ -1,6 +1,8 @@
 # Andre Doumad
 # 200904
 '''
+This problem was asked by Amazon.
+
 Given an array of strings products and a string searchWord. We want to design a system that suggests at most three product names from products after each character of searchWord is typed. Suggested products should have common prefix with the searchWord. If there are more than three products with a common prefix return the three lexicographically minimums products.
 
 Return list of lists of the suggested products after each character of searchWord is typed. 
@@ -62,7 +64,7 @@ class Solution():
         for ch in word:
             if ch not in root.sub:
                 root.sub[ch] = Trie()
-            root = root.sub[ch]
+            root = root.sub.get(ch)
             root.suggestions.append(word)
             root.suggestions.sort()
             if len(root.suggestions) > 3:
@@ -95,43 +97,3 @@ class UnitTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
-'''
-class Trie:
-    def __init__(self):
-        self.sub = {}
-        self.suggestion = []
-
-class Solution:
-    def insert(self, product, root):
-        trie = root
-        for char in product:
-            if char not in  trie.sub:
-                trie.sub[char] = Trie()
-            trie = trie.sub[char]
-            trie.suggestion.append(product)
-            trie.suggestion.sort()
-            if len(trie.suggestion) > 3:
-                trie.suggestion.pop()
-
-    def search(self, searchWord, root):
-        ans = []
-        for char in searchWord:
-            if root:
-                root = root.sub.get(char)
-            if root.suggestion:
-                print('root.suggestion ', root.suggestion)
-                ans.append(root.suggestion)
-
-            # ans.append(root.suggestion if root else [])
-            # print('ans')
-        return ans
-
-    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
-        root = Trie()
-        for product in sorted(products):
-            self.insert(product, root)
-        
-        return self.search(searchWord, root)
-
-'''
