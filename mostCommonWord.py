@@ -37,7 +37,9 @@ class Solution:
     def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
         wordCounts = {}
         p = paragraph.lower()
+        print(p)
         p = re.sub(r'\W+', ' ', p)
+        print(p)
         words = p.split()
         most = 0
         res = ''
@@ -50,7 +52,6 @@ class Solution:
                 res = word
                 most = wordCounts[word]
         return res
-        # pass
 
 s = Solution()
-print(s.mostCommonWord("Bob hit a ball, the hit BALL flew far after it was hit.", ['hit']))
+print(s.mostCommonWord("Bob hit 33a ball, the hit BALL flew far after it was hit.", ['hit']))
