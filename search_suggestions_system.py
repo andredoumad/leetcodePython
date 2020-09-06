@@ -7,8 +7,6 @@ Given an array of strings products and a string searchWord. We want to design a 
 
 Return list of lists of the suggested products after each character of searchWord is typed. 
 
- 
-
 Example 1:
 
 Input: products = ["mobile","mouse","moneypot","monitor","mousepad"], searchWord = "mouse"
