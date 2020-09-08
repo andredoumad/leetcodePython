@@ -22,47 +22,53 @@ Follow up:
 Try to solve it in O(n log k) time and O(n) extra space.
 '''
 
-class Solution:
-    def topKFrequent(self, words, k):
-        hashies = {}
-        for w in words:
-            if w not in hashies:
-                hashies[w] = 1
-            elif w in hashies:
-                hashies[w]+=1
-        res = []
-        i = int(0)
-        maxWords = int(k)
-        while i <= maxWords:
-            topW = []
-            topCount = 0
-            print('-------')
-            for k,v in hashies.items():
-                print('k ', k, ' v ', v)
-                if v >= topCount:
-                    topW.append(k)
-                    topCount = v
-            for w in topW:
-                del hashies[w]
-            topW.sort()
-            if len(topW) > 0:
-                for w in topW:
-                    if i < maxWords:
-                        print('appending1 ', w)
-                        res.append(w)
-                        i+=1
-            else:
-                print('appending2 ', topW)
-                if topW != []:
-                    res.append(topW)
-                i+=1
-
-        # res.sort()
-        print('RESULT: ', res)
-        return res
 
 s = Solution()
 
 # print(s.topKFrequent(["i", "love", "leetcode", "i", "love", "coding"], 2))
 # print(s.topKFrequent(["the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"],4))
 print(s.topKFrequent(["i", "love", "leetcode", "i", "love", "coding"], 3))
+
+
+
+
+'''
+from collections import defaultdict
+from heapq import heappush, heappop
+
+class WordFreq:
+    def __init__(self, freq, word):
+        self.freq = freq
+        self.word = word
+    def __lt__(self, other):
+        if self.freq != other.freq:
+            return self.freq.__lt__(other.freq)
+        else:
+            return self.word.__gt__(other.word)
+
+class Solution:
+    def topKFrequent(self, words, k):
+        """
+        :type words: List[str]
+        :type k: int
+        :rtype: List[str]
+        """
+        
+        # word frequency
+        word_frequency = defaultdict(int)
+        for word in words:
+            word_frequency[word] += 1
+        
+        # current k most frequent elements
+        k_most_frequent = []
+        for word, freq in word_frequency.items():
+            heappush(k_most_frequent, WordFreq(freq, word))
+            if len(k_most_frequent) == k + 1:
+                heappop(k_most_frequent)
+        
+        res = []
+        while len(k_most_frequent) != 0:
+            res.insert(0, heappop(k_most_frequent).word)
+        
+        return res
+'''

@@ -22,56 +22,22 @@ S will consist of lowercase English letters ('a' to 'z') only.
 
 class Solution:
     def partitionLabels(self, S):
-        pass
+        result, last_seen, max_last_seen, count = [], {}, 0, 0
+        for i, char in enumerate(S):
+            last_seen[char] = i
+        for i, char in enumerate(S):
+            max_last_seen = max(max_last_seen, last_seen[char])
+            count += 1
+            if i == max_last_seen:
+                result.append(count)
+                count = 0
+        return result
 
 
 solution = Solution()
-solution.partitionLabels('ababcbacadefegdehijhklij')
+print(solution.partitionLabels('ababcbacadefegdehijhklij'))
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# class Solution:
-#     def partitionLabels(self, S):
-#         dic = {}
-#         for i, c in enumerate(S):
-#             dic[c] = i
-
-#         for k,v in dic.items():
-#             print('dic k ', k, ' v ', v)
-        
-#         cur_max = 0
-#         res = []
-#         count = 0
-        
-#         for i, c in enumerate(S):
-#             count += 1
-#             cur_max = max(cur_max, dic[c])
-#             print('cur_max ', cur_max)
-#             if cur_max == i:
-#                 print('cur_max == i ')
-#                 res.append(count)
-#                 count = 0
-#         return res
 
 
 

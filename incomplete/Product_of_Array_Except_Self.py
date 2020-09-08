@@ -19,17 +19,7 @@ Could you solve it with constant space complexity? (The output array does not co
 class Solution:
 
     def productExceptSelf(self, nums):
-        p = 1
-        n = len(nums)
-        output = []
-        for i in range(0,n):
-            output.append(p)
-            p *= nums[i]
-        p = 1
-        for i in reversed(range(n)):
-            output[i] *= p
-            p *= nums[i]
-        return output
+        pass
 
 
 solution = Solution()
@@ -51,4 +41,43 @@ i = 3, your output becomes [1, 1, 2, 6*1] and p = p * 4 (4)
 i = 2, your output becomes [1, 1, 2*4, 6] and p = p * 3 (12)
 i = 1, your output becomes [1, 1*12, 8, 6] and p = p * 2 (24)
 final result: [24, 12, 8, 6]
+'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
+
+class Solution:
+
+    def productExceptSelf(self, nums):
+        p = 1
+        n = len(nums)
+        output = []
+        for i in range(0,n):
+            output.append(p)
+            p *= nums[i]
+        p = 1
+        for i in reversed(range(n)):
+            output[i] *= p
+            p *= nums[i]
+        return output
 '''

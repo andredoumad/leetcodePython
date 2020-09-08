@@ -32,7 +32,6 @@ class Solution:
                 start = max(start, dic[ch]+1)
             dic[ch] = i
         return max(res, len(s)-start)
-
 class UnitTest(unittest.TestCase):
     def test_a(self):
 
