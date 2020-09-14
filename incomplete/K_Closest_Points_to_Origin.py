@@ -32,13 +32,29 @@ Note:
 -10000 < points[i][0] < 10000
 -10000 < points[i][1] < 10000
 '''
+import heapq
+class Solution:
+    def kClosest(self, points, K):
+        
+        heap = []
+        
+        for (x, y) in points:
+            dist = -(x*x + y*y)
+            if len(heap) == K:
+                heapq.heappushpop(heap, (dist, x, y))
+            else:
+                heapq.heappush(heap, (dist, x, y))
+        
+        return [(x,y) for (dist,x, y) in heap]
 
+
+s = Solution()
+print(s.kClosest([[3,3],[5,-1],[-2,4]], 2))
+
+'''
 class Solution:
     def kClosest(self, points, K):
         
         points.sort(key = lambda K: K[0]**2 + K[1]**2) 
         return points[:K] 
-
-
-s = Solution()
-print(s.kClosest([[3,3],[5,-1],[-2,4]], 2))
+'''

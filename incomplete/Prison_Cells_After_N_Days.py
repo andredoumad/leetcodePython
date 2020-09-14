@@ -44,6 +44,40 @@ cells[i] is in {0, 1}
 1 <= N <= 10^9
 '''
 from typing import List
+# This is fast
+class Solution:
+    def prisonAfterNDays(self, cells: List[int], N: int) -> List[int]:
+        def nextday(cells):
+            next_day_cells = [0] *len(cells)
+            for i in range(1,len(cells)-1):
+                if cells[i-1] == cells[i+1]: 
+                    next_day_cells[i] = 1
+                else:
+                    next_day_cells[i] = 0
+            return next_day_cells
+        
+        seen = {}
+        while N > 0:
+            c = tuple(cells)
+            if c in seen:
+                N %= seen[c] - N
+            seen[c] = N
+
+            if N >= 1:
+                N -= 1
+                cells = nextday(cells)
+
+        return cells
+
+s = Solution()
+print(s.prisonAfterNDays([1,0,0,1,0,0,1,0], 1000000000))
+print(s.prisonAfterNDays([0,1,0,1,1,0,0,1], 7))
+
+
+
+
+'''
+# This is too slow
 class Solution:
     def prisonAfterNDays(self, cells: List[int], N: int) -> List[int]:
         # print(cells)
@@ -73,7 +107,4 @@ class Solution:
                 cells = newDay
             
         return newDay
-
-
-s = Solution()
-print(s.prisonAfterNDays([1,0,0,1,0,0,1,0], 1000000000))
+'''
