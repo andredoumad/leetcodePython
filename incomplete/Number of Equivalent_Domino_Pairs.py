@@ -30,14 +30,13 @@ class Solution:
     def numEquivDominoPairs(self, dominoes: List[List[int]]) -> int:
         # step 1: count the dominoes
         d = {}
-        for domi in dominoes:
-            p = tuple(sorted(domi))
-            print('p ', p)
+        for dom in dominoes:
+            p = tuple(sorted(dom))
             if p in d:
                 d[p] += 1
             else:
                 d[p] = 1
-        # step 2: caculate the pairs. for each pair, number of pairs = n*(n-1)//2
+        # step calculate it 
         c = 0
         for n in d.values():
             s = n*(n-1)//2
@@ -54,4 +53,44 @@ Dictionary takes O(1) to store.
 To generate the dictionary takes n*O(1) and calculate pairs takes O(n), the total time complexity is O(n), where n is the length of the input list.
 Space complexity: O(n)
 At worst case (every item in the input list appeared once), the algorithm needs a dictionary which it's size equals the length of the list, where n is the length of the input list.
+'''
+
+
+
+
+
+
+
+
+
+
+
+
+'''
+class Solution:
+    def numEquivDominoPairs(self, dominoes: List[List[int]]) -> int:
+        # step 1: count the dominoes
+        d = {}
+        for domi in dominoes:
+            p = tuple(sorted(domi))
+            print('p ', p)
+            if p in d:
+                d[p] += 1
+            else:
+                d[p] = 1
+        # step 2: caculate the pairs. for each pair, number of pairs = n*(n-1)//2
+        c = 0
+        for n in d.values():
+            s = n*(n-1)//2
+            c += s
+        return c
+'''
+
+'''
+output:
+p  (1, 2)
+p  (1, 2)
+p  (3, 4)
+p  (5, 6)
+1
 '''
