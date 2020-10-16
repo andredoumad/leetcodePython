@@ -88,3 +88,17 @@ Ran 1 test in 0.000s
 
 OK
 '''
+
+'''
+        brackMap= {'(':')','{':'}','[':']'}
+        lefBracks = set(['(','{','['])
+        stack = []
+        for val in s:
+            if val in lefBracks:
+                stack.append(val)
+            elif stack and val == brackMap[stack[-1]]:
+                stack.pop()
+            else:
+                return False
+        return stack == []
+'''
